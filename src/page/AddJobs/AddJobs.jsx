@@ -1,9 +1,11 @@
 import axios from "axios";
 import useAuth from "../../hooks/UseAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddJobs = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const handleAddJob = event => {
     event.preventDefault();
     const form = event.target;
@@ -34,7 +36,8 @@ const AddJobs = () => {
         icon: "question"
       });
       form.reset()
-      console.log(res.data.acknowledged);
+      navigate('/myPostedJobs')
+      // console.log(res.data.acknowledged);
      }
       
     })

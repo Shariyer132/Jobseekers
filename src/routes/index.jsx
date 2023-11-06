@@ -6,6 +6,10 @@ import ErrorPage from "../page/ErrorPage/ErrorPage";
 import Login from "../page/Login/Login";
 import Register from "../page/Register/Register";
 import AddJobs from "../page/AddJobs/AddJobs";
+import JobDetails from "../components/CategoryJobs/JobDetails";
+import BidReguest from "../page/BidRequest/BidReguest";
+import MyBids from "../page/MyBids/MyBids";
+import MyPostedJobs from "../page/MyPostedJobs/MyPostedJobs";
 
 const routes = createBrowserRouter([
     {
@@ -28,7 +32,28 @@ const routes = createBrowserRouter([
             {
                 path: '/addJob',
                 element:<AddJobs/>
-            }
+            },
+            {
+                path: "/jobs/:id",
+                element: <JobDetails/>,
+                loader:()=>fetch('http://localhost:5000/jobs')
+            },
+            {
+                path: "/bidRequest",
+                element: <BidReguest/>,
+                // loader:()=>fetch('http://localhost:5000/jobs')
+            },
+            {
+                path: "/myBids",
+                element: <MyBids/>,
+                // loader:()=>fetch('http://localhost:5000/jobs')
+            },
+            {
+                path: "/myPostedJobs",
+                element:<MyPostedJobs/>,
+                // loader:()=>fetch('http://localhost:5000/jobs')
+            },
+            
         ]
     }
 ]);
