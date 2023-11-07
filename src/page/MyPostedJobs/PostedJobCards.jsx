@@ -1,9 +1,12 @@
 // import { useState } from 'react';
 
+import axios from "axios";
+import Swal from "sweetalert2";
+
 // eslint-disable-next-line react/prop-types
 const PostedJobCards = ({ postedJob }) => {
     // eslint-disable-next-line react/prop-types
-    const { jobTitle, category, deadline, email, shortDescription } = postedJob;
+    const { _id, jobTitle, category, deadline, email, shortDescription } = postedJob;
 
     //defaultValue={maximumPrice}
     //defaultValue={minimumPrice}
@@ -20,6 +23,27 @@ const PostedJobCards = ({ postedJob }) => {
         const maximumPrice = form.maximumPrice.value;
         const shortDescription = form.shortDescription.value;
         console.log(email, jobTitle, deadline, category, minimumPrice, maximumPrice, shortDescription);
+        axios.patch(`http://localhost:5000/jobs/${_id}`, {
+            email,
+            jobTitle,
+            deadline,
+            category,
+            shortDescription,
+            minimumPrice,
+            maximumPrice,
+        })
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+
+                    document.getElementById('my_modal_4').close();
+
+                    Swal.fire({
+                        title: "Success",
+                        text: "Successfully updated your job",
+                        icon: "success"
+                      });
+                }
+            })
     }
 
     return (
@@ -32,7 +56,11 @@ const PostedJobCards = ({ postedJob }) => {
                     <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_4').showModal()}>Update</button>
                     <dialog id="my_modal_4" className="modal">
                         <div className="modal-box text-black w-11/12 max-w-5xl">
-                            <form onSubmit={handleUpdateJob} method="dialog">
+                            <form method="dialog">
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <form onSubmit={handleUpdateJob}>
 
                                 <div className="lg:flex gap-5">
                                     {/* email */}
