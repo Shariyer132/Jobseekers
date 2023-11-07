@@ -1,28 +1,53 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const JobDetails = () => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const jobs = useLoaderData();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const specificJob = jobs.find(job => job._id === id);
-    
+
 
     const isOwner = user?.email === specificJob?.email;
 
-    const handleBidJob = event =>{
+    const handleBidJob = event => {
         event.preventDefault();
+        const form = event.target;
+        const userEmail = form.userEmail.value;
+        const ownerEmail = form.email.value;
+        const bidPrice = form.bidPrice.value;
+        const deadline = form.deadline.value;
+        console.log(userEmail, ownerEmail, bidPrice, deadline);
         if (isOwner) {
-            return(
+            return (
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "You cannot bid on your own job listing.!"
-                  })
+                })
             )
         }
+        axios.post('http://localhost:5000/bidJobs', {
+            userEmail,
+            ownerEmail,
+            bidPrice,
+            deadline
+        })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "You have successfully bid on this job"
+                    })
+                    navigate('/myBids')
+                }
+            })
     }
 
     return (
@@ -39,7 +64,7 @@ const JobDetails = () => {
                             <span className="label-text">Price</span>
                         </label>
                         <label>
-                            <input type="number" name="price" placeholder="your bidding amount" className="input input-bordered w-full" />
+                            <input type="number" required name="bidPrice" placeholder="your bidding amount" className="input input-bordered w-full" />
                         </label>
                     </div>
 
@@ -49,7 +74,7 @@ const JobDetails = () => {
                             <span className="label-text">Deadline</span>
                         </label>
                         <label>
-                            <input type="date" name="deadline" className="input input-bordered w-full" />
+                            <input type="date" required name="deadline" className="input input-bordered w-full" />
                         </label>
                     </div>
                 </div>
@@ -61,7 +86,7 @@ const JobDetails = () => {
                             <span className="label-text">User email</span>
                         </label>
                         <label>
-                            <input type="email" readOnly value={user.email} name="email" className="input w-full input-bordered" />
+                            <input type="email" readOnly defaultValue={user.email} name="userEmail" className="input w-full input-bordered" />
                         </label>
                     </div>
 
@@ -71,7 +96,7 @@ const JobDetails = () => {
                             <span className="label-text">Owner email</span>
                         </label>
                         <label>
-                            <input type="email" readOnly value={specificJob?.email} name="email" className="input input-bordered w-full" />
+                            <input type="email" readOnly defaultValue={specificJob?.email} name="email" className="input input-bordered w-full" />
                         </label>
                     </div>
                 </div>

@@ -1,13 +1,11 @@
-// import { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import axios from "axios";
 import Swal from "sweetalert2";
 
-// eslint-disable-next-line react/prop-types
-const PostedJobCards = ({ postedJob }) => {
-    // eslint-disable-next-line react/prop-types
+// const PostedJobCards =({ postedJob }) => {
+const PostedJobCards =({ postedJob, setJobs, jobs }) => {
+   
     const { _id, jobTitle, category, deadline, email, shortDescription } = postedJob;
-
     //defaultValue={maximumPrice}
     //defaultValue={minimumPrice}
 
@@ -34,25 +32,53 @@ const PostedJobCards = ({ postedJob }) => {
         })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
-
                     document.getElementById('my_modal_4').close();
-
                     Swal.fire({
                         title: "Success",
                         text: "Successfully updated your job",
                         icon: "success"
-                      });
+                    });
                 }
             })
+    }
+
+    const handleDelete = _id => {
+        console.log(_id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            console.log(result);
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/jobs/${_id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data?.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your posted job has been deleted.",
+                                icon: "success"
+                            });
+                            const remaining = jobs.filter(job=>job?._id !== _id);
+                            setJobs(remaining);
+                            console.log(res.data);
+                        }
+                    })
+            }
+        });
     }
 
     return (
         <div className="card w-96 bg-neutral text-neutral-content">
             <div className="card-body items-center text-center">
-                <h2 className="card-title">{jobTitle}</h2>
-                <p>We are using cookies for no reason.</p>
+                <h2>{jobTitle}</h2>
+                <p>{shortDescription}</p>
                 <div className="card-actions justify-end">
-
                     <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_4').showModal()}>Update</button>
                     <dialog id="my_modal_4" className="modal">
                         <div className="modal-box text-black w-11/12 max-w-5xl">
@@ -144,11 +170,18 @@ const PostedJobCards = ({ postedJob }) => {
                         </div>
                     </dialog>
 
-                    <button className="btn btn-ghost">Delete</button>
+                    <button onClick={() => handleDelete(_id)} className="btn btn-ghost">Delete</button>
                 </div>
             </div>
         </div>
     );
 };
+
+PostedJobCards.propTypes={
+  postedJob: PropTypes.object.isRequired,
+  setJobs: PropTypes.func.isRequired,
+  jobs: PropTypes.array.isRequired
+
+}
 
 export default PostedJobCards;

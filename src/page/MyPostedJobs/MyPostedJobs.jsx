@@ -4,16 +4,21 @@ import useAuth from "../../hooks/UseAuth";
 import PostedJobCards from "./PostedJobCards";
 
 const MyPostedJobs = () => {
+    // const [loadedJobs, setLoadedJobs] = useState([]);
+    // const [jobs, setJobs] = useState(loadedJobs);
     const [jobs, setJobs] = useState([]);
+    // const [jobs, setJobs] = useState([]);
     const {user} = useAuth();
 
     useEffect(()=>{
         axios('http://localhost:5000/jobs')
         .then(res=>{
+            // setLoadedJobs(res.data);
             setJobs(res.data);
         })
     },[]);
 
+    // const myPostedJobs = loadedjobs.filter(job=> job?.email === user?.email)
     const myPostedJobs = jobs.filter(job=> job?.email === user?.email)
     // console.log(myPostedJobs);
 
@@ -26,6 +31,8 @@ const MyPostedJobs = () => {
                     myPostedJobs.map(postedJob=><PostedJobCards 
                         key={postedJob._id}
                         postedJob={postedJob}
+                        jobs={jobs}
+                        setJobs={setJobs}
                         ></PostedJobCards>)
                 }
             </div>
