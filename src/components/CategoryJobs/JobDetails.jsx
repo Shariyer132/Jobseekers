@@ -10,7 +10,7 @@ const JobDetails = () => {
     const navigate = useNavigate();
 
     const specificJob = jobs.find(job => job._id === id);
-
+    const {jobTitle} = specificJob;
 
     const isOwner = user?.email === specificJob?.email;
 
@@ -35,7 +35,8 @@ const JobDetails = () => {
             userEmail,
             ownerEmail,
             bidPrice,
-            deadline
+            deadline,
+            jobTitle
         })
             .then(res => {
                 console.log(res.data);

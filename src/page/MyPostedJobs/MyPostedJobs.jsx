@@ -4,38 +4,37 @@ import useAuth from "../../hooks/UseAuth";
 import PostedJobCards from "./PostedJobCards";
 
 const MyPostedJobs = () => {
-    // const [loadedJobs, setLoadedJobs] = useState([]);
-    // const [jobs, setJobs] = useState(loadedJobs);
     const [jobs, setJobs] = useState([]);
-    // const [jobs, setJobs] = useState([]);
-    const {user} = useAuth();
+    const { user } = useAuth();
 
-    useEffect(()=>{
+    useEffect(() => {
         axios('http://localhost:5000/jobs')
-        .then(res=>{
-            // setLoadedJobs(res.data);
-            setJobs(res.data);
-        })
-    },[]);
+            .then(res => {
+                setJobs(res.data);
+            })
+    }, []);
 
-    // const myPostedJobs = loadedjobs.filter(job=> job?.email === user?.email)
-    const myPostedJobs = jobs.filter(job=> job?.email === user?.email)
+    const myPostedJobs = jobs.filter(job => job?.email === user?.email)
     // console.log(myPostedJobs);
 
     return (
         <div>
-            <h2>my posted jobs: {myPostedJobs.length}</h2>
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-5 md:">  */}
-            <div className="flex flex-col md:flex-row gap-5 justify-around flex-wrap items-center"> 
-                {
-                    myPostedJobs.map(postedJob=><PostedJobCards 
-                        key={postedJob._id}
-                        postedJob={postedJob}
-                        jobs={jobs}
-                        setJobs={setJobs}
-                        ></PostedJobCards>)
-                }
-            </div>
+            {
+                user ?
+                    <div className="flex flex-col md:flex-row gap-5 justify-around flex-wrap items-center mt-10">
+                        {
+                            myPostedJobs.map(postedJob => <PostedJobCards
+                                key={postedJob._id}
+                                postedJob={postedJob}
+                                jobs={jobs}
+                                setJobs={setJobs}
+                            ></PostedJobCards>)
+                        }
+                    </div>
+                    :
+                    <h2 className="text-center mt-56 text-5xl font-bold">You have not posted any job yet.</h2>
+
+            }
         </div>
     );
 };

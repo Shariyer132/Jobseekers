@@ -8,8 +8,6 @@ const CategoryJobs = () => {
     const [tabIndex, setTabIndex] = useState(0);
     const [jobs, setJobs] = useState([]);
     const [categoryJobs, setCategoryJobs] = useState([]);
-    // singlecart
-    // const [selectedJob, setSelectedJob] = useState(null)
 
     const categories = ['web development', 'digital marketing', 'graphics design'];
 
@@ -31,14 +29,6 @@ const CategoryJobs = () => {
         const filteredJobs = jobs.filter(job => job?.category === selectedCategory);
         setCategoryJobs(filteredJobs);
     };
-
-    // view details jobs
-    // const handleViewDetails = id =>{
-    //     // console.log(id);
-    //     const clickedJob = jobs.find(job=> job?._id === id)
-    //     // console.log(clickedJob);
-    //     setSelectedJob(clickedJob)
-    // }
 
     return (
         <div className='my-20 pl-5 md:px-16'>

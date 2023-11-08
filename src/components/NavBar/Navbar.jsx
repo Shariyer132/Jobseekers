@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-// import bandLogo = 
+import bandLogo  from '../../assets/logo-e1612900264763 (1).png';
 import defaultPic from '../../assets/user.png'
 import useAuth from "../../hooks/UseAuth";
 
@@ -25,7 +25,7 @@ const Navbar = () => {
     
         return (
         <div>
-            <div className="navbar bg-pink-200">
+            <div className="navbar bg-[#F7F7FF]">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,8 +35,8 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <h2>hello</h2>
-                    {/* <a className="normal-case text-xl"><img className="w-56" src={bandLogo} alt="" /></a> */}
+                    {/* <h2>hello</h2> */}
+                    <a className="normal-case text-xl"><img className="w-56" src={bandLogo} alt="" /></a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -49,10 +49,8 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img src={user.photoURL} />
+                                        <img src={user?.photoURL} />
                                     </div>
-                                        
-                                   
                                 </label>
                                 <button tabIndex={0} className="dropdown-content btn btn-sm z-[1] menu p-1 shadow bg-base-100 rounded-box w-40" onClick={handleLogOut}>LogOut</button>
                                 <h3>{user?.displayName}</h3>

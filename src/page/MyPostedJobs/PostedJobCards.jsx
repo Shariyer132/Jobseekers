@@ -2,13 +2,9 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import Swal from "sweetalert2";
 
-// const PostedJobCards =({ postedJob }) => {
-const PostedJobCards =({ postedJob, setJobs, jobs }) => {
-   
-    const { _id, jobTitle, category, deadline, email, shortDescription } = postedJob;
-    //defaultValue={maximumPrice}
-    //defaultValue={minimumPrice}
+const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
 
+    const { _id, jobTitle, category, deadline, email, shortDescription, minimumPrice, maximumPrice } = postedJob;
 
     const handleUpdateJob = event => {
         event.preventDefault();
@@ -64,7 +60,7 @@ const PostedJobCards =({ postedJob, setJobs, jobs }) => {
                                 text: "Your posted job has been deleted.",
                                 icon: "success"
                             });
-                            const remaining = jobs.filter(job=>job?._id !== _id);
+                            const remaining = jobs.filter(job => job?._id !== _id);
                             setJobs(remaining);
                             console.log(res.data);
                         }
@@ -74,12 +70,14 @@ const PostedJobCards =({ postedJob, setJobs, jobs }) => {
     }
 
     return (
-        <div className="card w-96 bg-neutral text-neutral-content">
+        <div className="card w-96 bg-base-100 shadow-xl">
             <div className="card-body items-center text-center">
-                <h2>{jobTitle}</h2>
+                <h2 className="text-3xl font-semibold">{jobTitle}</h2>
+                <p className="text-lg font-medium">Deadline: {deadline}</p>
+                <p className="text-lg font-medium">Price range: {`$${minimumPrice}-${maximumPrice}`}</p>
                 <p>{shortDescription}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_4').showModal()}>Update</button>
+                    <button className="btn btn-info text-white" onClick={() => document.getElementById('my_modal_4').showModal()}>Update</button>
                     <dialog id="my_modal_4" className="modal">
                         <div className="modal-box text-black w-11/12 max-w-5xl">
                             <form method="dialog">
@@ -138,7 +136,7 @@ const PostedJobCards =({ postedJob, setJobs, jobs }) => {
                                             <span className="label-text">Maximum Price</span>
                                         </label>
                                         <label>
-                                            <input type="number" name="maximumPrice" className="input input-bordered w-full" />
+                                            <input type="number" name="maximumPrice" defaultValue={maximumPrice} className="input input-bordered w-full" />
                                         </label>
                                     </div>
                                     {/* Minimum price */}
@@ -147,7 +145,7 @@ const PostedJobCards =({ postedJob, setJobs, jobs }) => {
                                             <span className="lebel-text">Minimum Price</span>
                                         </label>
                                         <label>
-                                            <input type="number" name="minimumPrice" className="input input-bordered w-full" />
+                                            <input type="number" defaultValue={minimumPrice} name="minimumPrice" className="input input-bordered w-full" />
                                         </label>
                                     </div>
                                 </div>
@@ -164,23 +162,23 @@ const PostedJobCards =({ postedJob, setJobs, jobs }) => {
 
                                 <div className="modal-action">
                                     {/* if there is a button, it will close the modal */}
-                                    <input type="submit" className="btn btn-block" value="Update" />
+                                    <input type="submit" className="btn btn-block btn-success" value="Update" />
                                 </div>
                             </form>
                         </div>
                     </dialog>
 
-                    <button onClick={() => handleDelete(_id)} className="btn btn-ghost">Delete</button>
+                    <button onClick={() => handleDelete(_id)} className="btn btn-error">Delete</button>
                 </div>
             </div>
         </div>
     );
 };
 
-PostedJobCards.propTypes={
-  postedJob: PropTypes.object.isRequired,
-  setJobs: PropTypes.func.isRequired,
-  jobs: PropTypes.array.isRequired
+PostedJobCards.propTypes = {
+    postedJob: PropTypes.object.isRequired,
+    setJobs: PropTypes.func.isRequired,
+    jobs: PropTypes.array.isRequired
 
 }
 
