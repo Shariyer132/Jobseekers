@@ -34,6 +34,7 @@ const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
                         text: "Successfully updated your job",
                         icon: "success"
                     });
+                    form.reset()
                 }
             })
     }

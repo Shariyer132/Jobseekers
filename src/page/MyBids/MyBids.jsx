@@ -1,18 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BidJobCards from "./BidJobCards";
+import useAuth from "../../hooks/UseAuth";
 
 const MyBids = () => {
+    const { user } = useAuth();
     const [bidJobs, setBidJobs] = useState([]);
+console.log(user.email);
 
-
+    const url = `http://localhost:5000/bidJobs?email=${user?.email}`;
     useEffect(() => {
-        axios('http://localhost:5000/bidJobs',{withCredentials:true})
+        axios(url, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
-                setBidJobs(res.data);
+                setBidJobs(res?.data);
             })
-    }, [])
+    }, [url])
     return (
         <div className="overflow-x-auto">
             <table className="table">
@@ -23,7 +26,7 @@ const MyBids = () => {
                         <th>Email</th>
                         <th>Deadline</th>
                         <th>Status</th>
-                        <th>Complete</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +36,7 @@ const MyBids = () => {
                     }
                 </tbody>
             </table>
-        </div>        
+        </div>
     );
 };
 

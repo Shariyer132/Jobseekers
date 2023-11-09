@@ -10,18 +10,19 @@ const JobDetails = () => {
     const navigate = useNavigate();
 
     const specificJob = jobs.find(job => job._id === id);
-    const {jobTitle} = specificJob;
+    const { jobTitle, category, deadline, maximumPrice, minimumPrice, shortDescription } = specificJob;
+    console.log(specificJob);
 
     const isOwner = user?.email === specificJob?.email;
 
     const handleBidJob = event => {
         event.preventDefault();
         const form = event.target;
-        const userEmail = form.userEmail.value;
+        const email = form.userEmail.value;
         const ownerEmail = form.email.value;
         const bidPrice = form.bidPrice.value;
         const deadline = form.deadline.value;
-        console.log(userEmail, ownerEmail, bidPrice, deadline);
+        console.log(email, ownerEmail, bidPrice, deadline);
         if (isOwner) {
             return (
                 Swal.fire({
@@ -32,11 +33,12 @@ const JobDetails = () => {
             )
         }
         axios.post('http://localhost:5000/bidJobs', {
-            userEmail,
+            email,
             ownerEmail,
             bidPrice,
             deadline,
-            jobTitle
+            jobTitle,
+            status: 'pending'
         })
             .then(res => {
                 console.log(res.data);
@@ -53,10 +55,15 @@ const JobDetails = () => {
 
     return (
         <div className="m-8">
-            <div>
-                <h2>{specificJob?.jobTitle}</h2>
+            <div className="card card-side bg-base-100 shadow-xl mb-10">
+                <div className="card-body">
+                    <h2 className="text-5xl font-bold">{jobTitle}</h2>
+                    <p className="text-lg font-semibold">Type: {category}</p>
+                    <p className="text-base font-semibold">Price: {`${minimumPrice}-${maximumPrice}`}</p>
+                    <p className="text-lg font-semibold">Deadline: {deadline}</p>
+                    <p>{shortDescription}</p>
+                </div>
             </div>
-
             <form onSubmit={handleBidJob}>
                 <div className="lg:flex gap-6">
                     {/* price */}

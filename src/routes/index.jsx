@@ -10,6 +10,7 @@ import JobDetails from "../components/CategoryJobs/JobDetails";
 import BidReguest from "../page/BidRequest/BidReguest";
 import MyBids from "../page/MyBids/MyBids";
 import MyPostedJobs from "../page/MyPostedJobs/MyPostedJobs";
+import PrivateRoutes from "./PrivateRoute";
 
 const routes = createBrowserRouter([
     {
@@ -40,17 +41,17 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/bidRequest",
-                element: <BidReguest/>,
+                element: <PrivateRoutes><BidReguest/></PrivateRoutes>
                 // loader:()=>fetch('http://localhost:5000/jobs')
             },
             {
                 path: "/myBids",
-                element: <MyBids/>,
+                element: <PrivateRoutes><MyBids/></PrivateRoutes>,
                 // loader:()=>fetch('http://localhost:5000/jobs')
             },
             {
                 path: "/myPostedJobs",
-                element:<MyPostedJobs/>,
+                element:<PrivateRoutes><MyPostedJobs/></PrivateRoutes>,
                 // loader:()=>fetch('http://localhost:5000/jobs')
             },
             
