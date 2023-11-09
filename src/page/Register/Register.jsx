@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../../hooks/UseAuth";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -37,6 +38,7 @@ const Register = () => {
     }
     return (
         <div>
+            <Helmet><title>Digilab register page</title></Helmet>
             <div className="min-h-screen bg-base-200">
                 <div className="hero-content max-w-xl  mx-auto">
                     <div className="card placeholder: flex-shrink-0 w-full shadow-2xl bg-base-100">

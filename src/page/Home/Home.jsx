@@ -3,18 +3,23 @@ import CategoryJobs from "../../components/CategoryJobs/CategoryJobs";
 import CollaborateEffect from "../../components/CollaborateEffect/CollaborateEffect";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     // const handleCategory = categorie =>{
     //     console.log(categorie);
     // }
     return (
-        <div>
-            <Header/>
-            <CategoryJobs/>
-            <CollaborateEffect/>            <AboutUs/>
-            <Footer/>
-        </div>
+        <>
+            <Helmet>
+                <title>Digilab Home</title>
+            </Helmet>
+            <Header />
+            <CategoryJobs />
+            <CollaborateEffect />
+            <AboutUs />
+            <Footer />
+        </>
     );
 };
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import BidJobCards from "./BidJobCards";
 import useAuth from "../../hooks/UseAuth";
+import { Helmet } from "react-helmet-async";
 
 const MyBids = () => {
     const { user } = useAuth();
@@ -17,6 +18,8 @@ console.log(user.email);
             })
     }, [url])
     return (
+        <>
+        <Helmet><title>Digilab My bids</title></Helmet>
         <div className="overflow-x-auto">
             <table className="table">
                 {/* head */}
@@ -37,6 +40,7 @@ console.log(user.email);
                 </tbody>
             </table>
         </div>
+        </>
     );
 };
 

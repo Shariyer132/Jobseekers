@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/UseAuth";
 import PostedJobCards from "./PostedJobCards";
+import { Helmet } from "react-helmet-async";
 
 const MyPostedJobs = () => {
     const [jobs, setJobs] = useState([]);
@@ -19,6 +20,7 @@ const MyPostedJobs = () => {
 
     return (
         <div>
+            <Helmet><title>Digilab my posted jobs</title></Helmet>
             {
                 user ?
                     <div className="flex flex-col md:flex-row gap-5 justify-around flex-wrap items-center mt-10">

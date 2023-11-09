@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/NavBar/Navbar";
+import { HelmetProvider } from "react-helmet-async";
 
 const Root = () => {
     return (
-        <div>
+        < HelmetProvider>
             <Navbar/>
             <Outlet/>
-        </div>
+        </ HelmetProvider>
     );
 };
 

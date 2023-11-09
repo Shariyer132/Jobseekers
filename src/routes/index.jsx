@@ -32,11 +32,11 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/addJob',
-                element:<AddJobs/>
+                element:<PrivateRoutes><AddJobs/></PrivateRoutes>
             },
             {
                 path: "/jobs/:id",
-                element: <JobDetails/>,
+                element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
                 loader:()=>fetch('http://localhost:5000/jobs')
             },
             {

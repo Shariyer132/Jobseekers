@@ -2,6 +2,7 @@ import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import useAuth from '../../hooks/UseAuth';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -36,6 +37,7 @@ const Login = () => {
     }
     return (
         <div>
+            <Helmet><title>Digilab login page</title></Helmet>
             <div className="min-h-screen bg-base-200">
                 <div className="hero-content max-w-xl mx-auto">
                     <div className="card placeholder: flex-shrink-0 w-full shadow-2xl bg-base-100">

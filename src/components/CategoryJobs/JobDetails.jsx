@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const JobDetails = () => {
     const { user } = useAuth();
@@ -55,6 +56,9 @@ const JobDetails = () => {
 
     return (
         <div className="m-8">
+            <Helmet>
+                <title>Digilab </title>
+            </Helmet>
             <div className="card card-side bg-base-100 shadow-xl mb-10">
                 <div className="card-body">
                     <h2 className="text-5xl font-bold">{jobTitle}</h2>
@@ -94,7 +98,7 @@ const JobDetails = () => {
                             <span className="label-text">User email</span>
                         </label>
                         <label>
-                            <input type="email" readOnly defaultValue={user.email} name="userEmail" className="input w-full input-bordered" />
+                            <input type="email" readOnly defaultValue={user?.email} name="userEmail" className="input w-full input-bordered" />
                         </label>
                     </div>
 

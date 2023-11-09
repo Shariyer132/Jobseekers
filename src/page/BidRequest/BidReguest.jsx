@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/UseAuth";
 import BidReqJobs from "./BidReqJobs";
+import { Helmet } from "react-helmet-async";
 
 const BidReguest = () => {
     const [reqJobs, setReqJobs] = useState([]);
@@ -20,6 +21,8 @@ const BidReguest = () => {
 
 
     return (
+        <>
+        <Helmet><title>Digilab Bid Requests</title></Helmet>
         <div className="overflow-x-auto">
             <table className="table">
                 {/* head */}
@@ -39,6 +42,7 @@ const BidReguest = () => {
                 </tbody>
             </table>
         </div>  
+        </>
     );
 };
 
