@@ -57,7 +57,7 @@ const JobDetails = () => {
     return (
         <div className="m-8">
             <Helmet>
-                <title>Digilab </title>
+                <title>Digilab Job Details</title>
             </Helmet>
             <div className="card card-side bg-base-100 shadow-xl mb-10">
                 <div className="card-body">

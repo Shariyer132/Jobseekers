@@ -9,7 +9,7 @@ const BidReqJobs = ({ jobReq }) => {
     const { _id, jobTitle, deadline, status, email } = jobReq;
 
     // Function to handle accepting the bid request
-    const handleAccept = () => {
+    const handleAccept = (_id) => {
         console.log(`Accepted request with ID ${_id}`);
         axios.patch(`http://localhost:5000/bidJobs/${_id}`, { status: 'in progress' })
         .then(res=>{
@@ -18,7 +18,7 @@ const BidReqJobs = ({ jobReq }) => {
     }
 
     // Function to handle rejecting the bid request
-    const handleReject = () => {
+    const handleReject = (_id) => {
         console.log(`Rejected request with ID ${_id}`);
         axios.patch(`http://localhost:5000/bidJobs/${_id}`, { status: 'rejected' })
         .then(res=>{
@@ -46,8 +46,8 @@ const BidReqJobs = ({ jobReq }) => {
             ) : (
                 <td className="flex flex-col gap-2">
                     <button
-                        onClick={handleAccept} className="btn btn-primary btn-sm">Accept</button>
-                    <button onClick={handleReject} className="btn btn-sm btn-error">Reject</button>
+                        onClick={()=>handleAccept(_id)} className="btn btn-primary btn-sm">Accept</button>
+                    <button onClick={()=>handleReject(_id)} className="btn btn-sm btn-error">Reject</button>
                 </td>
             )}
         </tr>

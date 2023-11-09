@@ -13,30 +13,31 @@ const AddJobs = () => {
     event.preventDefault();
     const form = event.target;
     // console.log(form);
-    const email = form.email.value;
+    const ownerEmail = form.email.value;
     const jobTitle = form.title.value;
     const deadline = form.deadline.value;
     const category = form.category.value;
     const minPrice = form.minPrice.value;
     const maxPrice = form.maxPrice.value;
     const shortDescription = form.shortDescription.value;
-    console.log(email, jobTitle, minPrice, maxPrice, deadline, category, shortDescription);
+    console.log(ownerEmail, jobTitle, minPrice, maxPrice, deadline, category, shortDescription);
 
     axios.post('http://localhost:5000/jobs', {
-      email,
+      ownerEmail,
       jobTitle,
       deadline,
       category,
       shortDescription,
-      priceRange: `${minPrice}-${maxPrice}`,
+      maximumPrice: maxPrice,
+      minimumPrice:minPrice
     })
       .then(res => {
         console.log(res.data.acknowledged, res.data);
         if (res.data.acknowledged) {
           Swal.fire({
-            title: "The Internet?",
-            text: "That thing is still around?",
-            icon: "question"
+            title: "Success",
+            text: "Job add successfully",
+            icon: "success"
           });
           form.reset()
           navigate('/myPostedJobs')

@@ -15,7 +15,7 @@ const MyPostedJobs = () => {
             })
     }, []);
 
-    const myPostedJobs = jobs.filter(job => job?.email === user?.email)
+    const myPostedJobs = jobs.filter(job => job?.ownerEmail === user?.email)
     // console.log(myPostedJobs);
 
     return (

@@ -4,21 +4,21 @@ import Swal from "sweetalert2";
 
 const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
 
-    const { _id, jobTitle, category, deadline, email, shortDescription, minimumPrice, maximumPrice } = postedJob;
+    const { _id, jobTitle, category, deadline, ownerEmail, shortDescription, minimumPrice, maximumPrice } = postedJob;
 
     const handleUpdateJob = event => {
         event.preventDefault();
         const form = event.target;
-        const email = form.email.value;
+        const ownerEmail = form.email.value;
         const jobTitle = form.jobTitle.value;
         const deadline = form.deadline.value;
         const category = form.category.value;
         const minimumPrice = form.minimumPrice.value;
         const maximumPrice = form.maximumPrice.value;
         const shortDescription = form.shortDescription.value;
-        console.log(email, jobTitle, deadline, category, minimumPrice, maximumPrice, shortDescription);
+        console.log(ownerEmail, jobTitle, deadline, category, minimumPrice, maximumPrice, shortDescription);
         axios.patch(`http://localhost:5000/jobs/${_id}`, {
-            email,
+            ownerEmail,
             jobTitle,
             deadline,
             category,
@@ -28,13 +28,22 @@ const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
         })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
-                    document.getElementById('my_modal_4').close();
+                    // const updatedJobs = jobs.map(job => {
+                    //     if (job._id === _id) {
+                    //         return { ...job, ...updatedJobs };
+                    //     }
+                    //     return job;
+                    // })
+                    // setJobs(updatedJobs)
+                    // setJobs(jobs.map(job => job._id === _id ? { ...job, ...updatedJobData } : job));
+                    document.getElementById(_id).close();
                     Swal.fire({
                         title: "Success",
                         text: "Successfully updated your job",
                         icon: "success"
                     });
                     form.reset()
+                    
                 }
             })
     }
@@ -78,8 +87,8 @@ const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
                 <p className="text-lg font-medium">Price range: {`$${minimumPrice}-${maximumPrice}`}</p>
                 <p>{shortDescription}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-info text-white" onClick={() => document.getElementById('my_modal_4').showModal()}>Update</button>
-                    <dialog id="my_modal_4" className="modal">
+                    <button className="btn btn-info text-white" onClick={() => document.getElementById(_id).showModal()}>Update</button>
+                    <dialog id={_id} className="modal">
                         <div className="modal-box text-black w-11/12 max-w-5xl">
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
@@ -94,7 +103,7 @@ const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
                                             <span className="label-text">Your Email</span>
                                         </label>
                                         <label>
-                                            <input type="email" name="email" required defaultValue={email} readOnly className="input input-bordered w-full" />
+                                            <input type="email" name="email" required defaultValue={ownerEmail} readOnly className="input input-bordered w-full" />
                                         </label>
                                     </div>
                                     {/* Job title */}
