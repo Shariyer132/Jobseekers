@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 const BidJobCards = ({ bidJob }) => {
-    // eslint-disable-next-line react/prop-types
     const { ownerEmail, jobTitle, deadline, status } = bidJob;
     return (
         <tr>
@@ -15,5 +14,9 @@ const BidJobCards = ({ bidJob }) => {
         </tr>
     );
 };
+
+BidJobCards.propTypes={
+    bidJob: PropTypes.object.isRequired
+}
 
 export default BidJobCards;

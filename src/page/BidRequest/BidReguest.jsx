@@ -9,7 +9,7 @@ const BidReguest = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        axios(`http://localhost:5000/bidJobs?ownerEmail=${user?.email}`, { withCredentials: true })
+        axios(`https://assignment-eleventh-server-wheat.vercel.app/bidJobs?ownerEmail=${user?.email}`, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
                 setReqJobs(res.data)

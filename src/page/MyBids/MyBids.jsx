@@ -9,7 +9,7 @@ const MyBids = () => {
     const [bidJobs, setBidJobs] = useState([]);
 console.log(user.email);
 
-    const url = `http://localhost:5000/bidJobs?email=${user?.email}`;
+    const url = `https://assignment-eleventh-server-wheat.vercel.app/bidJobs?email=${user?.email}`;
     useEffect(() => {
         axios(url, { withCredentials: true })
             .then(res => {

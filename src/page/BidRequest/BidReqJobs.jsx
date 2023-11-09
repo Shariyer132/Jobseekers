@@ -1,17 +1,14 @@
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 
-
-
-// eslint-disable-next-line react/prop-types
 const BidReqJobs = ({ jobReq }) => {
-    // eslint-disable-next-line react/prop-types
     const { _id, jobTitle, deadline, status, email } = jobReq;
 
     // Function to handle accepting the bid request
     const handleAccept = (_id) => {
         console.log(`Accepted request with ID ${_id}`);
-        axios.patch(`http://localhost:5000/bidJobs/${_id}`, { status: 'in progress' })
+        axios.patch(`https://assignment-eleventh-server-wheat.vercel.app/bidJobs/${_id}`, { status: 'in progress' })
         .then(res=>{
             console.log(res.data);
         })
@@ -20,7 +17,7 @@ const BidReqJobs = ({ jobReq }) => {
     // Function to handle rejecting the bid request
     const handleReject = (_id) => {
         console.log(`Rejected request with ID ${_id}`);
-        axios.patch(`http://localhost:5000/bidJobs/${_id}`, { status: 'rejected' })
+        axios.patch(`https://assignment-eleventh-server-wheat.vercel.app/bidJobs/${_id}`, { status: 'rejected' })
         .then(res=>{
             console.log(res.data);
         })
@@ -54,5 +51,8 @@ const BidReqJobs = ({ jobReq }) => {
     );
 
 };
+BidReqJobs.propTypes={
+    jobReq: PropTypes.object.isRequired
+}
 
 export default BidReqJobs;

@@ -17,7 +17,7 @@ const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
         const maximumPrice = form.maximumPrice.value;
         const shortDescription = form.shortDescription.value;
         console.log(ownerEmail, jobTitle, deadline, category, minimumPrice, maximumPrice, shortDescription);
-        axios.patch(`http://localhost:5000/jobs/${_id}`, {
+        axios.patch(`https://assignment-eleventh-server-wheat.vercel.app/jobs/${_id}`, {
             ownerEmail,
             jobTitle,
             deadline,
@@ -61,7 +61,7 @@ const PostedJobCards = ({ postedJob, setJobs, jobs }) => {
         }).then((result) => {
             console.log(result);
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/jobs/${_id}`)
+                axios.delete(`https://assignment-eleventh-server-wheat.vercel.app/jobs/${_id}`)
                     .then(res => {
                         console.log(res.data);
                         if (res.data?.deletedCount > 0) {

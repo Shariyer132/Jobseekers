@@ -9,7 +9,7 @@ const MyPostedJobs = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        axios('http://localhost:5000/jobs')
+        axios('https://assignment-eleventh-server-wheat.vercel.app/jobs')
             .then(res => {
                 setJobs(res.data);
             })

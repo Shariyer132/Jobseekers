@@ -6,9 +6,7 @@ import Header from "../../components/Header/Header";
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
-    // const handleCategory = categorie =>{
-    //     console.log(categorie);
-    // }
+
     return (
         <>
             <Helmet>

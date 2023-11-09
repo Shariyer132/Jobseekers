@@ -37,22 +37,19 @@ const routes = createBrowserRouter([
             {
                 path: "/jobs/:id",
                 element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
-                loader:()=>fetch('http://localhost:5000/jobs')
+                loader:()=>fetch('https://assignment-eleventh-server-wheat.vercel.app/jobs')
             },
             {
                 path: "/bidRequest",
                 element: <PrivateRoutes><BidReguest/></PrivateRoutes>
-                // loader:()=>fetch('http://localhost:5000/jobs')
             },
             {
                 path: "/myBids",
                 element: <PrivateRoutes><MyBids/></PrivateRoutes>,
-                // loader:()=>fetch('http://localhost:5000/jobs')
             },
             {
                 path: "/myPostedJobs",
                 element:<PrivateRoutes><MyPostedJobs/></PrivateRoutes>,
-                // loader:()=>fetch('http://localhost:5000/jobs')
             },
             
         ]

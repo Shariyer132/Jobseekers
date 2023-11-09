@@ -12,7 +12,6 @@ const AddJobs = () => {
   const handleAddJob = event => {
     event.preventDefault();
     const form = event.target;
-    // console.log(form);
     const ownerEmail = form.email.value;
     const jobTitle = form.title.value;
     const deadline = form.deadline.value;
@@ -22,7 +21,7 @@ const AddJobs = () => {
     const shortDescription = form.shortDescription.value;
     console.log(ownerEmail, jobTitle, minPrice, maxPrice, deadline, category, shortDescription);
 
-    axios.post('http://localhost:5000/jobs', {
+    axios.post('https://assignment-eleventh-server-wheat.vercel.app/jobs', {
       ownerEmail,
       jobTitle,
       deadline,

@@ -33,7 +33,7 @@ const JobDetails = () => {
                 })
             )
         }
-        axios.post('http://localhost:5000/bidJobs', {
+        axios.post('https://assignment-eleventh-server-wheat.vercel.app/bidJobs', {
             email,
             ownerEmail,
             bidPrice,
