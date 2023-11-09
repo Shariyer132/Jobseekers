@@ -12,7 +12,7 @@ const CategoryJobs = () => {
     const categories = ['web development', 'digital marketing', 'graphics design'];
 
     useEffect(() => {
-        axios('https://assignment-eleventh-server-wheat.vercel.app/jobs')
+        axios('https://assignment-eleventh-server-wheat.vercel.app/jobs', { withCredentials: true })
             .then(res => {
                 setJobs(res.data);
                 // Filter the jobs for the first category to display initially

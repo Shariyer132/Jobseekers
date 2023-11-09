@@ -17,7 +17,7 @@ const BidReqJobs = ({ jobReq }) => {
     // Function to handle rejecting the bid request
     const handleReject = (_id) => {
         console.log(`Rejected request with ID ${_id}`);
-        axios.patch(`https://assignment-eleventh-server-wheat.vercel.app/bidJobs/${_id}`, { status: 'rejected' })
+        axios.patch(`https://assignment-eleventh-server-wheat.vercel.app/bidJobs/${_id}`, { status: 'rejected' }, {withCredentials:true})
         .then(res=>{
             console.log(res.data);
         })
